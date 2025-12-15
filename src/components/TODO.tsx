@@ -64,9 +64,14 @@ export default function TodoApp() {
 
     const loadTodos = async () => {
         setLoading(true);
-        const data = await todoService.fetchAll();
-        setTodos(data);
-        setLoading(false);
+        try {
+            const data = await todoService.fetchAll();
+            setTodos(data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleAddTodo = async () => {
